@@ -29,13 +29,40 @@ X_test_tensor = torch.tensor(X_test)
 y_test_tensor = torch.tensor(y_test)
   
 # 4. TODO: Define a simple PyTorch model  
-# class SimpleNet(nn.Module):  
-#     def __init__(self, input_dim, output_dim):  
-#         super(SimpleNet, self).__init__()  
-#         # layers here  
-#     def forward(self, x):  
-#         # forward pass here  
-  
+class SimpleNet(nn.Module):
+     def __init__(self, input_dim, output_dim):
+         super(SimpleNet, self).__init__()
+         self.Linear1 = torch.nn.Linear(input_dim, 16)
+         self.ReLU1 = torch.nn.ReLU()
+         self.Dropout1 = torch.nn.Dropout(0.5)
+         self.Linear2 = torch.nn.Linear(16,32)
+         self.ReLU2 = torch.nn.ReLU()
+         self.Dropout2 = torch.nn.Dropout(0.5)
+         self.Linear3 = torch.nn.Linear(32,16)
+         self.ReLU3 = torch.nn.ReLU()
+         self.Dropout3 = torch.nn.Dropout(0.5)
+         self.Linear4 = torch.nn.Linear(16,8)
+         self.ReLU4 = torch.nn.ReLU()
+         self.Dropout4 = torch.nn.Dropout(0.5)
+         self.Linear5 = torch.nn.Linear(8,output_dim)
+         self.Softmax = torch.nn.Softmax(dim=1)
+
+     def forward(self, x):
+         x = self.Linear1(x)
+         x = self.ReLU1(x)
+         x = self.Dropout1(x)
+         x = self.Linear2(x)
+         x = self.ReLU2(x)
+         x = self.Dropout2(x)
+         x = self.Linear3(x)
+         x = self.ReLU3(x)
+         x = self.Dropout3(x)
+         x = self.Linear4(x)
+         x = self.ReLU4(x)
+         x = self.Dropout4(x)
+         x = self.Linear5(x)
+         x = self.Softmax(x)
+         return x
 # input_dim = ...  
 # output_dim = ...  
 # model = SimpleNet(input_dim, output_dim)  
