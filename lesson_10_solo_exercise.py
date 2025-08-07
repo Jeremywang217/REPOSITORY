@@ -76,19 +76,23 @@ num_epochs = 20
 batch_size = 32  
 loss_history = []  
   
-# for epoch in range(num_epochs):  
-#     # Shuffle and batch your data  
-#     # Forward, backward, optimizer.step()  
-#     # Track and store average loss in loss_history  
+for epoch in range(num_epochs):
+    optimizer.zero_grad()
+    predictions = model(X_train_tensor)
+    loss = criterion(predictions, y_train_tensor)
+    loss.backward()
+    optimizer.step()
+
   
-#     print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")  
+    print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {(loss/len(X_train)).item():.4f}")
   
 # 7. TODO: Evaluation (accuracy, etc.)  
-# with torch.no_grad():  
-#     outputs = ...  
-#     predicted = ...  
-#     accuracy = ...  
-#     print(f"Test Accuracy: {accuracy.item() * 100:.2f}%")  
+with torch.no_grad():
+    outputs = model(X_test_tensor)
+    predicted = torch.argmax(outputs, dim=1)
+    accuracy = torch.mean(predicted == y_test_tensor)
+
+    print(f"Test Accuracy: {accuracy.item() * 100:.2f}%")
   
 # 8. Plotting (READY, but will fail until above done)  
 plt.figure()  
