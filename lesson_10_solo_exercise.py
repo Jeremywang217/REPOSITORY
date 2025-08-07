@@ -63,13 +63,13 @@ class SimpleNet(nn.Module):
          x = self.Linear5(x)
          x = self.Softmax(x)
          return x
-# input_dim = ...  
-# output_dim = ...  
-# model = SimpleNet(input_dim, output_dim)  
+input_dim = digits.data.shape[1]
+output_dim = digits.target.shape[1]
+model = SimpleNet(input_dim, output_dim)
   
 # 5. TODO: Specify loss function and optimizer  
-# criterion = ...  
-# optimizer = ...  
+criterion = torch.nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
   
 # 6. TODO: Training loop  
 num_epochs = 20  
