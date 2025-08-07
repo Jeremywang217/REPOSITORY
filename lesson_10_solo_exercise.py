@@ -23,10 +23,10 @@ y = digits.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
   
 # 3. TODO: Convert your splits to PyTorch tensors  
-X_train_tensor = ...
-# y_train_tensor = ...  
-# X_test_tensor = ...  
-# y_test_tensor = ...  
+X_train_tensor = torch.tensor(X_train)
+y_train_tensor = torch.tensor(y_train)
+X_test_tensor = torch.tensor(X_test)
+y_test_tensor = torch.tensor(y_test)
   
 # 4. TODO: Define a simple PyTorch model  
 # class SimpleNet(nn.Module):  
